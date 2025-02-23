@@ -11,7 +11,7 @@ body{
 }
 
 [type="range"].kawaii {
-  --base: #eb1bba;
+  --base: #09f330;
   --light: color-mix(in sRGB, var(--base) 60%, #fff);
   --lighter: color-mix(in sRGB, var(--base) 30%, #fff);
   --dark: color-mix(in sRGB, var(--base) 95%, #000);;

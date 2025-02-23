@@ -11,16 +11,16 @@ body{
 }
 
 [type="range"].kawaii {
-  --base: #5613dc;
+  --base: #fe8ce4;
   --light: color-mix(in sRGB, var(--base) 60%, #fff);
-  --lighter: color-mix(in sRGB, var(--base) 30%, #c6e20b);
-  --dark: color-mix(in sRGB, var(--base) 95%, #2cd10f);;
-  --transparent: color-mix(in sRGB, var(--base) 0%, #870ac500);
+  --lighter: color-mix(in sRGB, var(--base) 30%, #fff);
+  --dark: color-mix(in sRGB, var(--base) 95%, #000);;
+  --transparent: color-mix(in sRGB, var(--base) 0%, #0000);
   appearance: none;
   font-size: 1em;
   width: 20em;
   height: 2em;
-  border: 0.5em solid #b99494;
+  border: 0.5em solid #fff;
   border-radius: 2em;
   box-shadow:
     0 0 1em #0001, 
