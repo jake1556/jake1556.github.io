@@ -1,0 +1,18 @@
+img {
+  --s: 80px; /* corner size */
+  padding: 15px; /* the gap */
+  border: 8px solid #f23303;
+  mask:
+    conic-gradient(at var(--s) var(--s),#0000 75%,#000 0)
+     0 0/calc(100% - var(--s)) calc(100% - var(--s)),
+    conic-gradient(#05f43d 0 0) content-box;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: grid;
+  place-content: center;
+  background: #3706a1;
+}
+
