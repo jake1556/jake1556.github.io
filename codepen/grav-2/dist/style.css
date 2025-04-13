@@ -1,0 +1,26 @@
+body {
+	background-color: #141414;
+}
+
+
+
+
+#interactive__homepage {
+	pointer-events: none;
+	background-color: transparent;
+	-webkit-user-select: none; /* Safari */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+/Edge */
+	user-select: none; /* Standard */
+	position: fixed;
+	top:0;
+	left: 0;
+}
+
+#interactive__text {
+	display: none;
+}
+
+#interactive__images {
+	display: none;
+}
