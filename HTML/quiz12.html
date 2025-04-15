@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  
+  <style>
+    p {
+      color: purple;
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+  
+  <div id="cats"></div>
+
+  <script>
+    const container = document.getElementById("cats");
+    const url = "https://mdn.github.io/learning-area/javascript/oojs/tasks/json/sample.json";
+
+    fetch(url)
+      .then(res => res.text())
+      .then(data => {
+        let cats = JSON.parse(data);
+        let momText = "The mother cats are called ";
+        let total = 0;
+        let boys = 0;
+
+        for (let i = 0; i < cats.length; i++) {
+          let name = cats[i].name;
+
+          if (i === cats.length - 1 && cats.length > 1) {
+            momText += "and " + name;
+          } else {
+            momText += name;
+            if (i < cats.length - 2) {
+              momText += ", ";
+            } else if (i === cats.length - 2) {
+              momText += " ";
+            }
+          }
+
+          // Count kittens
+          for (let k = 0; k < cats[i].kittens.length; k++) {
+            total++;
+            if (cats[i].kittens[k].gender === "m") {
+              boys++;
+            }
+          }
+        }
+
+        let girls = total - boys;
+        let kittenText = "Total kittens: " + total + ", Male kittens: " + boys + ", Female kittens: " + girls;
+
+        let p1 = document.createElement("p");
+        p1.textContent = momText;
+
+        let p2 = document.createElement("p");
+        p2.textContent = kittenText;
+
+        container.appendChild(p1);
+        container.appendChild(p2);
+      });
+  </script>
+
+</body>
+</html>
