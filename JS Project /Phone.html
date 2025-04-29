@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Final Project</title>
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    .ball {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 20px;
+      color: #040404;
+      cursor: pointer;
+      user-select: none;
+      border: 2px solid black;
+      transition: background-color 0.5s;
+    }
+
+    #phoneDisplay {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 28px;
+      font-weight: bold;
+      color: #030303;
+      background-color: rgba(4, 242, 16, 0.926);
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+    }
+
+    h1 {
+      margin-top: 20px;
+      color: #aaf006;
+      text-shadow: 0 0 10px #000;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Please Enter Your Phone Number by clicking the Balls.</h1>
+  <div id="phoneDisplay">(xxx) xxx-xxxx</div>
+
+  <script>
+    let phoneNumber = "";
+
+    function createBall() {
+      const ball = document.createElement('div');
+      ball.className = 'ball';
+      ball.innerText = Math.floor(Math.random() * 10);
+      ball.style.top = Math.random() * (window.innerHeight - 60) + 'px';
+      ball.style.left = Math.random() * (window.innerWidth - 60) + 'px';
+      ball.style.backgroundColor = getRandomColor();
+      document.body.appendChild(ball);
+
+      ball.addEventListener('click', function () {
+        if (phoneNumber.length < 10) {
+          phoneNumber += ball.innerText;
+          updateDisplay();
+          ball.remove();
+        }
+
+        if (phoneNumber.length === 10) {
+          alert("Is this your Phone Number? " + formatPhoneNumber(phoneNumber));
+        }
+      });
+
+      moveBall(ball);
+      changeBallNumber(ball);
+    }
+
+    function moveBall(ball) {
+      let dx = (Math.random() - 0.5) * 8;
+      let dy = (Math.random() - 0.5) * 8;
+
+      function animate() {
+        const rect = ball.getBoundingClientRect();
+        let x = rect.left + dx;
+        let y = rect.top + dy;
+
+        if (x < 0 || x > window.innerWidth - 50) dx = -dx;
+        if (y < 0 || y > window.innerHeight - 50) dy = -dy;
+
+        ball.style.left = (rect.left + dx) + "px";
+        ball.style.top = (rect.top + dy) + "px";
+
+        if (Math.random() < 0.05) {
+          ball.style.backgroundColor = getRandomColor();
+        }
+
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    }
+
+    function changeBallNumber(ball) {
+      const interval = setInterval(() => {
+        if (!document.body.contains(ball)) {
+          clearInterval(interval);
+          return;
+        }
+        ball.innerText = Math.floor(Math.random() * 10);
+      }, 2000);
+    }
+
+    function updateDisplay() {
+      document.getElementById('phoneDisplay').innerText = formatPhoneNumber(phoneNumber);
+    }
+
+    function formatPhoneNumber(num) {
+      const part1 = num.substring(0, 3);
+      const part2 = num.substring(3, 6);
+      const part3 = num.substring(6, 10);
+      return "(" + part1 + ") " + part2 + "-" + part3;
+    }
+
+    function getRandomColor() {
+      const colors = [
+        "#FF5733", "#33FF57", "#3357FF", "#FF33A6",
+        "#33FFF2", "#F3FF33", "#A633FF", "#FF8F33",
+        "#33FF8F", "#FF3333", "#33A6FF", "#00FFFF", "#FF00FF", "#FFFF00"
+      ];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    setInterval(createBall, 500);
+  </script>
+
+</body>
+</html>
